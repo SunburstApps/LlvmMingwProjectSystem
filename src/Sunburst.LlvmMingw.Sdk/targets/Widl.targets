@@ -1,10 +1,9 @@
 ﻿<Project>
-  <Import Project="Midl.props" />
   <Target Name="BeforeMidl" BeforeTargets="Midl" />
   <Target Name="AfterMidl" AfterTargets="Midl" />
 
   <Target Name="Midl" DependsOnTargets="_PrepareMidl">
-    <UpToDateCheck InputItems="@(Midl)" OutputItems="%(Midl.OutputFiles)">
+    <UpToDateCheck InputFile="%(Midl.Identity)" OutputFiles="%(Midl.OutputFiles)">
       <Output TaskParameter="UpdatedFiles" ItemName="_MidlOutdated" />
     </UpToDateCheck>
 
