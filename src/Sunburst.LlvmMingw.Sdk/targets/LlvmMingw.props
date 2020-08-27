@@ -1,25 +1,7 @@
 ﻿<Project>
-  <PropertyGroup>
-    <!-- Copy logic to know if managed targets got imported: https://github.com/dotnet/sdk/blob/49002c14cf91ecd08e79d6184dbd4716c005b509/src/Tasks/Microsoft.NET.Build.Tasks/sdk/Sdk.targets#L25-L27 -->
-    <ManagedLanguageTargetsGotImported Condition="'$(MSBuildProjectExtension)' == '.csproj'">true</ManagedLanguageTargetsGotImported>
-    <ManagedLanguageTargetsGotImported Condition="'$(MSBuildProjectExtension)' == '.vbproj'">true</ManagedLanguageTargetsGotImported>
-    <ManagedLanguageTargetsGotImported Condition="'$(MSBuildProjectExtension)' == '.fsproj'">true</ManagedLanguageTargetsGotImported>
-  </PropertyGroup>
-
   <Import Project="$(CustomBeforeLlvmMingwProps)" Condition=" '$(CustomBeforeLlvmMingwProps)' != '' And Exists('$(CustomBeforeLlvmMingwProps)') " />
 
-  <PropertyGroup>
-    <!-- Disable default Compile and EmbeddedResource items for NoTargets projects -->
-    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
-    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
-
-    <!--
-      NuGet should always restore Traversal projects with "PackageReference" style restore.  Setting this property will cause the right thing to happen even if there aren't any PackageReference items in the project.
-    -->
-    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
-  </PropertyGroup>
-
-  <Import Project="Sdk.props" Sdk="Microsoft.NET.Sdk" Condition=" '$(MicrosoftCommonPropsHasBeenImported)' != 'true' "/>
+  <Import Project="Midl.props" />
 
   <Import Project="$(CustomAfterLlvmMingwProps)" Condition=" '$(CustomAfterLlvmMingwProps)' != '' And Exists('$(CustomAfterLlvmMingwProps)') " />
 

@@ -1,0 +1,6 @@
+<Project>
+  <UsingTask TaskName="UpToDateCheck" AssemblyFile="$(MSBuildThisFileDirectory)net5.0\Sunburst.LlvmMingw.BuildTasks.dll" Condition="'$(MSBuildRuntimeType)' == 'Core'" />
+  <UsingTask TaskName="UpToDateCheck" AssemblyFile="$(MSBuildThisFileDirectory)net462\Sunburst.LlvmMingw.BuildTasks.dll" Condition="'$(MSBuildRuntimeType)' != 'Core'" />
+  <UsingTask TaskName="WidlGenerateHeaders" AssemblyFile="$(MSBuildThisFileDirectory)net5.0\Sunburst.LlvmMingw.BuildTasks.dll" Condition="'$(MSBuildRuntimeType)' == 'Core'" />
+  <UsingTask TaskName="WidlGenerateHeaders" AssemblyFile="$(MSBuildThisFileDirectory)net462\Sunburst.LlvmMingw.BuildTasks.dll" Condition="'$(MSBuildRuntimeType)' != 'Core'" />
+</Project>
