@@ -16,7 +16,7 @@ namespace Sunburst.LlvmMingw.Sdk
         public ITaskItem[] OutputFiles { get; set; }
 
         [Output]
-        public ITaskItem[] FilesToRemove { get; set; }
+        public ITaskItem[] UpdatedFiles { get; set; }
 
         public override bool Execute()
         {
@@ -30,17 +30,15 @@ namespace Sunburst.LlvmMingw.Sdk
                     dateCache.Add(info.FullName, info.LastWriteTimeUtc);
                 }
 
-                var toRemove = new List<ITaskItem>();
+                var updated = new List<ITaskItem>();
                 foreach (ITaskItem file in InputFiles)
                 {
                     FileInfo info = new FileInfo(file.GetMetadata("FullPath"));
-                    if (dateCache.Values.All(date => date <= info.LastWriteTimeUtc))
-                    {
-                        toRemove.Add(file);
-                    }
+                    if (dateCache.Values.Any(outputDate => outputDate > info.LastWriteTimeUtc))
+                        updated.Add(file);
                 }
 
-                FilesToRemove = toRemove.ToArray();
+                UpdatedFiles = updated.ToArray();
             }
             catch (Exception ex)
             {
