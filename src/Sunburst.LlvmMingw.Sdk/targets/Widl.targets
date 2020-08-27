@@ -2,14 +2,11 @@
   <Target Name="BeforeMidl" BeforeTargets="Midl" />
   <Target Name="AfterMidl" AfterTargets="Midl" />
 
-  <Target Name="Midl" DependsOnTargets="_PrepareMidl">
-    <UpToDateCheck InputFile="%(Midl.Identity)" OutputFiles="%(Midl.OutputFiles)">
-      <Output TaskParameter="UpdatedFiles" ItemName="_MidlOutdated" />
-    </UpToDateCheck>
-
-    <WidlGenerateHeaders LlvmMingwRoot="$(LlvmMingwRoot)" TargetArchitecture="$(Architecture)"
-        SourceFile="%(_MidlOutdated.Identity)" IncludeDirectories="%(_MidlOutdated.IncludeDirectories)"
-        PreprocessorDefinitions="%(_MidlOutdated.PreprocessorDefinitions)">
+  <Target Name="Midl" DependsOnTargets="_PrepareMidl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)">
+    <WidlGenerateHeaders
+        LlvmMingwRoot="$(LlvmMingwRoot)" TargetArchitecture="$(Architecture)"
+        SourceFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)">
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="Header" ItemName="ClangHeader" />
     </WidlGenerateHeaders>
@@ -33,6 +30,9 @@
     <ItemGroup>
       <Midl>
         <OutputFiles Condition="'%(Midl.HeaderFilePath)' != ''">%(Midl.HeaderFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
+
+      <Midl>
         <OutputFiles Condition="'%(Midl.TypeLibraryFilePath)' != ''">%(Midl.TypeLibraryFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
     </ItemGroup>
