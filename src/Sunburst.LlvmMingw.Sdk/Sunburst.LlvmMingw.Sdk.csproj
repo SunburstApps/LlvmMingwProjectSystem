@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <EnableDefaultNoneItems>False</EnableDefaultNoneItems>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,4 +10,8 @@
     <PackageReference Include="Microsoft.Build.Utilities.Core" Version="16.6.0" PrivateAssets="all" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Include="targets\*.props" Pack="True" PackagePath="targets" />
+    <Content Include="targets\*.targets" Pack="True" PackagePath="targets" />
+  </ItemGroup>
 </Project>
