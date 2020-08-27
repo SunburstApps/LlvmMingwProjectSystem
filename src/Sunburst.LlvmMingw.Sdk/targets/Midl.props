@@ -3,14 +3,14 @@
     <EnableDefaultMidlItems Condition="'$(EnableDefaultMidlItems)' != 'False'">True</EnableDefaultMidlItems>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(EnableDefaultMidlItems)' == 'True'">
-    <Midl Include="$(MSBuildProjectDirectory)\**\*.midl" Exclude="$(DefaultItemExcludes);bin\**;obj\**" />
-  </ItemGroup>
-
   <ItemDefinitionGroup>
     <Midl>
       <IncludeDirectories>$(DefaultMidlIncludeDirectories)</IncludeDirectories>
       <PreprocessorDefinitions>$(DefaultMidlPreprocesorDefinitions)</PreprocessorDefinitions>
     </Midl>
   </ItemDefinitionGroup>
+
+  <ItemGroup Condition="'$(EnableDefaultMidlItems)' == 'True'">
+    <Midl Include="$(MSBuildProjectDirectory)\**\*.midl" Exclude="$(DefaultItemExcludes);bin\**;obj\**" />
+  </ItemGroup>
 </Project>
