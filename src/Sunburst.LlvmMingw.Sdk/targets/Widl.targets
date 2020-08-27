@@ -37,5 +37,9 @@
         <OutputFiles Condition="'%(Midl.TypeLibraryFilePath)' != ''">%(Midl.TypeLibraryFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
     </ItemGroup>
+
+    <!-- Third, create directories that don't already exist. -->
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)'))" Condition="!Exists($([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)')))" />
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)'))" Condition="!Exists($([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)')))" />
   </Target>
 </Project>
