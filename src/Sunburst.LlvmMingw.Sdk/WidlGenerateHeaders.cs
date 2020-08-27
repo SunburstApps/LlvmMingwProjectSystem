@@ -36,14 +36,14 @@ namespace Sunburst.LlvmMingw.Sdk
         protected override string GenerateFullPathToTool()
         {
             string filename = Utility.ExpandToolName(TargetArchitecture, "widl");
-            return Path.Join(LlvmMingwRoot, "bin", filename);
+            return Path.Combine(LlvmMingwRoot, "bin", filename);
         }
 
         public override bool Execute()
         {
             try
             {
-                GeneratedHeader = new TaskItem(Path.Join(OutputDirectory, OutputHeaderFileName));
+                GeneratedHeader = new TaskItem(Path.Combine(OutputDirectory, OutputHeaderFileName));
                 GeneratedHeader.SetMetadata("UsesPCH", "False");
 
                 bool success = base.Execute();
