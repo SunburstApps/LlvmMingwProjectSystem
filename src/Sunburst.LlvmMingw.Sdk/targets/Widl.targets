@@ -19,13 +19,13 @@
     <!-- First, set default values based on shorthand properties. -->
     <ItemGroup>
       <Midl>
-        <HeaderFilePath Condition="'%(Midl.HeaderFilePath)' == '' and '%(Midl.GenerateHeader)' == 'true'">
-          $(IntermediateOutputDirectory)Generated Headers\%(Filename).h
-        </HeaderFilePath>
+        <HeaderFilePath Condition="'%(Midl.HeaderFilePath)' == '' and '%(Midl.GenerateHeader)' == 'true'">$(IntermediateOutputDirectory)Generated Headers\%(Filename).h</HeaderFilePath>
+      </Midl>
+    </ItemGroup>
 
-        <TypeLibraryFilePath Condition="'%(Midl.TypeLibraryFilePath)' == '' and '%(Midl.GenerateTypeLibrary)' == 'true'">
-          $(IntermediateOutputDirectory)Generated Files\%(Filename).tlb
-        </TypeLibraryFilePath>
+    <ItemGroup>
+      <Midl>
+        <TypeLibraryFilePath Condition="'%(Midl.TypeLibraryFilePath)' == '' and '%(Midl.GenerateTypeLibrary)' == 'true'">$(IntermediateOutputDirectory)Generated Files\%(Filename).tlb</TypeLibraryFilePath>
       </Midl>
     </ItemGroup>
 
@@ -38,7 +38,7 @@
     </ItemGroup>
 
     <!-- Third, create directories that don't already exist. -->
-    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)'))" Condition="!Exists($([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)')))" />
-    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)'))" Condition="!Exists($([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)')))" />
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)'))" Condition="'%(Midl.HeaderFilePath)' != '' and !Exists($([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)')))" />
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)'))" Condition="'%(Midl.TypeLibraryFilePath)' != '' and !Exists($([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)')))" />
   </Target>
 </Project>
