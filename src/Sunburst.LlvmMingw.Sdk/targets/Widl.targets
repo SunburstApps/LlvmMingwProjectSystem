@@ -2,7 +2,7 @@
   <Target Name="BeforeMidl" BeforeTargets="Midl" />
   <Target Name="AfterMidl" AfterTargets="Midl" />
 
-  <Target Name="Midl" DependsOnTargets="_PrepareMidl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)">
+  <Target Name="Midl" DependsOnTargets="PrepareMidl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)">
     <WidlGenerateHeaders
         LlvmMingwRoot="$(LlvmMingwRoot)" TargetArchitecture="$(Architecture)"
         SourceFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
@@ -12,7 +12,7 @@
     </WidlGenerateHeaders>
   </Target>
 
-  <Target Name="_PrepareMidl">
+  <Target Name="PrepareMidl">
     <!-- First, set default values based on shorthand properties. -->
     <ItemGroup>
       <Midl>
