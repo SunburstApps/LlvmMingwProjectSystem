@@ -38,7 +38,7 @@
     </ItemGroup>
 
     <!-- Third, create directories that don't already exist. -->
-    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)'))" Condition="'%(Midl.HeaderFilePath)' != '' and !Exists($([System.IO.Path]::GetDirectoryName('%(Midl.HeaderFilePath)')))" />
-    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)'))" Condition="'%(Midl.TypeLibraryFilePath)' != '' and !Exists($([System.IO.Path]::GetDirectoryName('%(Midl.TypeLibraryFilePath)')))" />
+    <MakeParentDir Files="%(Midl.HeaderFilePath)" Condition="'%(Midl.HeaderFilePath)' != ''" />
+    <MakeParentDir Files="%(Midl.TypeLibraryFilePath)" Condition="'%(Midl.TypeLibraryFilePath)' != ''" />
   </Target>
 </Project>
