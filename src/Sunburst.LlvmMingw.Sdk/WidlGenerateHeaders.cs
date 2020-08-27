@@ -56,7 +56,7 @@ namespace Sunburst.LlvmMingw.Sdk
 
                 return success;
             }
-            catch (Exception ex) when (ex is InvalidOperationException or ArgumentException)
+            catch (Exception ex) when (ex is InvalidOperationException || ex is ArgumentException)
             {
                 Log.LogErrorFromException(ex);
                 return false;
