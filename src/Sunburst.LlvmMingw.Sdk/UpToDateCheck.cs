@@ -29,12 +29,11 @@ namespace Sunburst.LlvmMingw.Sdk
                     FileInfo outputInfo = new FileInfo(file.GetMetadata("FullPath"));
                     if (!outputInfo.Exists)
                     {
-                        Log.LogMessage(MessageImportance.Normal, $"File {outputInfo.Name} does not exist");
+                        Log.LogMessage(MessageImportance.Normal, $"File {outputInfo.FullName} does not exist");
                         dateCache.Add(outputInfo.FullName, new DateTime(0));
                     }
                     else
                     {
-                        Log.LogMessage(MessageImportance.Normal, $"File {outputInfo.Name}, last modified time {outputInfo.LastWriteTimeUtc}");
                         dateCache.Add(outputInfo.FullName, outputInfo.LastWriteTimeUtc);
                     }
                 }
@@ -43,12 +42,12 @@ namespace Sunburst.LlvmMingw.Sdk
                 FileInfo inputInfo = new FileInfo(InputFile.GetMetadata("FullPath"));
                 if (!dateCache.Values.Any(outputDate => outputDate > inputInfo.LastWriteTimeUtc))
                 {
-                    Log.LogMessage(MessageImportance.Normal, $"File {inputInfo.Name} is newer than its outputs");
+                    Log.LogMessage(MessageImportance.Normal, $"File {inputInfo.FullName} needs to be rebuilt");
                     updated.Add(InputFile);
                 }
                 else
                 {
-                    Log.LogMessage(MessageImportance.Normal, $"File {inputInfo.Name} up-to-date.");
+                    Log.LogMessage(MessageImportance.Normal, $"File {inputInfo.FullName} is up-to-date.");
                 }
 
                 UpdatedFiles = updated.ToArray();
