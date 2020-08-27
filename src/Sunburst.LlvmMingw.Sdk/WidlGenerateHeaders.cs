@@ -7,6 +7,9 @@ namespace Sunburst.LlvmMingw.Sdk
 {
     public class WidlGenerateHeaders : ToolTask
     {
+        [Required]
+        public ITaskItem SourceFile { get; set; }
+
         [Output]
         public ITaskItem[] Headers { get; set; }
 
@@ -86,7 +89,10 @@ namespace Sunburst.LlvmMingw.Sdk
                 builder.AppendSwitch("--win64");
             }
 
+            builder.AppendFileNameIfNotNull(SourceFile);
             return builder.ToString();
         }
+
+        protected override string GetWorkingDirectory() => OutputDirectory;
     }
 }
