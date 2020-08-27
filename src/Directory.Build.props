@@ -8,8 +8,9 @@
     <Authors>William Kent</Authors>
     <Copyright>Copyright © 2018-2019 William Kent. All rights reserved.</Copyright>
     <Product>WordPerfect Viewer</Product>
-
-    <AssemblyVersion Condition="'$(Version)' == ''">1.0.0.0</AssemblyVersion>
-    <FileVersion Condition="'$(FileVersion)' == '' and '$(AssemblyVersion)' != ''">$(AssemblyVersion)</FileVersion>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="3.1.74" PrivateAssets="all" />
+  </ItemGroup>
 </Project>
