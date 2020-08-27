@@ -1,6 +1,6 @@
 ﻿<Project>
   <PropertyGroup>
-    <EnableDefaultMidlItems Condition="'$(EnableDefaultMidlItems)' != 'False'">True</EnableDefaultMidlItems>
+    <EnableDefaultMidlItems Condition="'$(EnableDefaultMidlItems)' == ''">True</EnableDefaultMidlItems>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
@@ -10,7 +10,7 @@
     </Midl>
   </ItemDefinitionGroup>
 
-  <ItemGroup Condition="'$(EnableDefaultMidlItems)' == 'True'">
-    <Midl Include="$(MSBuildProjectDirectory)\**\*.midl" Exclude="$(DefaultItemExcludes);bin\**;obj\**" />
+  <ItemGroup Condition="'$(EnableDefaultItems)' == 'True' and '$(EnableDefaultMidlItems)' == 'True'">
+    <Midl Include="**\*.idl" Exclude="$(DefaultItemExcludes);$(DefaultItemExcludesInProjectFolder);bin\**;obj\**" />
   </ItemGroup>
 </Project>
