@@ -11,6 +11,28 @@
                 "PreprocessorDefinitions": {
                     "type": "file-list",
                     "description": "Preprocessor macros to define when compiling this IDL file"
+                },
+                "GenerateHeader": {
+                    "type": "bool",
+                    "default": "false",
+                    "description": "Whether or not to generate a header file and include it in the compilation automatically"
+                },
+                "HeaderFilePath": {
+                    "type": "file",
+                    "description": "The full path to the header file output by the IDL compiler. Leave blank if undesired."
+                },
+                "GenerateTypeLibrary": {
+                    "type": "bool",
+                    "default": "false",
+                    "description": "Whether or not to generate a TLB file"
+                },
+                "TypeLibraryFilePath": {
+                    "type": "file",
+                    "description": "The full path to the TLB output by the IDL compiler. Leave blank if undesired."
+                },
+                "OutputFiles": {
+                    "type": "file-list",
+                    "description": "Files that are output by compilation of this IDL file. Used for incremental builds."
                 }
             }
         }

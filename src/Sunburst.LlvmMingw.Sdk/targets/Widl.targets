@@ -1,7 +1,31 @@
 ﻿<Project>
+  <Import Project="Midl.props" />
   <Target Name="BeforeMidl" BeforeTargets="Midl" />
   <Target Name="AfterMidl" AfterTargets="Midl" />
 
-  <Target Name="Midl" Inputs="@(Midl)">
+  <Target Name="Midl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)" DependsOnTargets="_PrepareMidl">
+  </Target>
+
+  <Target Name="_PrepareMidl">
+    <!-- First, set default values based on shorthand properties. -->
+    <ItemGroup>
+      <Midl>
+        <HeaderFilePath Condition="'%(Midl.HeaderFilePath)' == '' and '%(Midl.GenerateHeader)' == 'true'">
+          $(IntermediateOutputDirectory)Generated Headers\%(Filename).h
+        </HeaderFilePath>
+
+        <TypeLibraryFilePath Condition="'%(Midl.TypeLibraryFilePath)' == '' and '%(Midl.GenerateTypeLibrary)' == 'true'">
+          $(IntermediateOutputDirectory)Generated Files\%(Filename).tlb
+        </TypeLibraryFilePath>
+      </Midl>
+    </ItemGroup>
+
+    <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
+    <ItemGroup>
+      <Midl>
+        <OutputFiles Condition="'%(Midl.HeaderFilePath)' != ''">%(Midl.HeaderFilePath);%(Midl.OutputFiles)</OutputFiles>
+        <OutputFiles Condition="'%(Midl.TypeLibraryFilePath)' != ''">%(Midl.TypeLibraryFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
+    </ItemGroup>
   </Target>
 </Project>
