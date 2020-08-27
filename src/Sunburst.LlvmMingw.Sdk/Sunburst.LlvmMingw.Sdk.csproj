@@ -8,8 +8,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildOutputTargetFolder Condition="'$(TargetFramework)' == 'net5.0'">build\net5.0</BuildOutputTargetFolder>
-    <BuildOutputTargetFolder Condition="'$(TargetFramework)' == 'net462'">build\net462</BuildOutputTargetFolder>
+    <BuildOutputTargetFolder>targets</BuildOutputTargetFolder>
   </PropertyGroup>
 
   <ItemGroup>
