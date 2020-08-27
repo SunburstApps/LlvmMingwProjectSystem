@@ -10,7 +10,7 @@
     </Midl>
   </ItemDefinitionGroup>
 
-  <ItemGroup Condition="'$(EnableDefaultItems)' == 'True' and '$(EnableDefaultMidlItems)' == 'True'">
+  <ItemGroup Condition="'$(EnableDefaultItems)' != 'False' and '$(EnableDefaultMidlItems)' != 'False'">
     <Midl Include="**\*.idl" Exclude="$(DefaultItemExcludes);$(DefaultItemExcludesInProjectFolder);bin\**;obj\**" />
   </ItemGroup>
 </Project>
