@@ -1,0 +1,5 @@
+<Project>
+  <ItemGroup>
+    <KnownFrameworkReference Update="@(KnownFrameworkReference)" IsWindowsOnly="false" />
+  </ItemGroup>
+</Project>
