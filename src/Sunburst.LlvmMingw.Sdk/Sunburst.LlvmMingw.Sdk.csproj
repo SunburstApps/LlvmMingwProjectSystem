@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <EnableDefaultNoneItems>False</EnableDefaultNoneItems>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +14,6 @@
   <ItemGroup>
     <Content Include="targets\*.props" Pack="True" PackagePath="targets" />
     <Content Include="targets\*.targets" Pack="True" PackagePath="targets" />
+    <Content Include="targets\*.buildschema.json" Pack="True" PackagePath="targets" />
   </ItemGroup>
 </Project>

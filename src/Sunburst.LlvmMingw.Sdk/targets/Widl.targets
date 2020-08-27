@@ -1,0 +1,7 @@
+﻿<Project>
+  <Target Name="BeforeMidl" BeforeTargets="Midl" />
+  <Target Name="AfterMidl" AfterTargets="Midl" />
+
+  <Target Name="Midl" Inputs="@(Midl)">
+  </Target>
+</Project>

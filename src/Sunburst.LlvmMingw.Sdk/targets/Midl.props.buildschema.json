@@ -1,0 +1,36 @@
+﻿{
+    "items": {
+        "Midl": {
+            "description": "List of IDL files to preprocess using an IDL compiler",
+            "type": "file-list",
+            "metadata": {
+                "IncludeDirectories": {
+                    "type": "file-list",
+                    "description": "Paths to search for included headers or imported IDL files"
+                },
+                "PreprocessorDefinitions": {
+                    "type": "file-list",
+                    "description": "Preprocessor macros to define when compiling this IDL file"
+                }
+            }
+        }
+    },
+
+    "properties": {
+        "EnableDefaultMidlItems": {
+            "description": "Whether or not to automatically compile all *.idl files detected under the project directory",
+            "type": "bool",
+            "default": "true"
+        },
+
+        "DefaultMidlIncludeDirectories": {
+            "description": "Paths to search for included headers or imported IDL files when compiling any IDL file in this project",
+            "type": "file-list"
+        },
+
+        "DefaultMidlPreprocesorDefinitions": {
+            "description": "Preprocessor macros to define when compiling any IDL file in this project",
+            "type": "file-list"
+        }
+    }
+}
