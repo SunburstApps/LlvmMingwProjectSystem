@@ -7,6 +7,7 @@
     <Midl>
       <IncludeDirectories>$(DefaultMidlIncludeDirectories)</IncludeDirectories>
       <PreprocessorDefinitions>$(DefaultMidlPreprocesorDefinitions)</PreprocessorDefinitions>
+      <AutoCompileGeneratedSourceFiles>True</AutoCompileGeneratedSourceFiles>
     </Midl>
   </ItemDefinitionGroup>
 

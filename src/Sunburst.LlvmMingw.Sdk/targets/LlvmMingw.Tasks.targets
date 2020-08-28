@@ -5,5 +5,6 @@
   </PropertyGroup>
 
   <UsingTask TaskName="WidlGenerateHeaders" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateRpcClientStub" AssemblyFile="$(LlvmMingwTasksPath)" />
   <UsingTask TaskName="MakeParentDir" AssemblyFile="$(LlvmMingwTasksPath)" />
 </Project>

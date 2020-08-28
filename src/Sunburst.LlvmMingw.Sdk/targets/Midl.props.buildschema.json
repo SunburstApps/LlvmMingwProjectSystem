@@ -30,9 +30,23 @@
                     "type": "file",
                     "description": "The full path to the TLB output by the IDL compiler. Leave blank if undesired."
                 },
+                "GenerateRpcClientStub": {
+                    "type": "bool",
+                    "default": "false",
+                    "description": "Whether or not to generate an RPC client stub source file"
+                },
+                "RpcClientStubFilePath": {
+                    "type": "file",
+                    "description": "The full path to the RPC client stub source file output by the IDL compiler. Leave blank if undesired."
+                },
                 "OutputFiles": {
                     "type": "file-list",
                     "description": "Files that are output by compilation of this IDL file. Used for incremental builds."
+                },
+                "AutoCompileGeneratedSourceFiles": {
+                    "type": "bool",
+                    "default": "true",
+                    "description": "Whether or not to automatically compile source files generated from by the IDL compiler."
                 }
             }
         }

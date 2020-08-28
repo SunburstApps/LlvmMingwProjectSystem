@@ -11,6 +11,15 @@
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="Header" ItemName="ClangHeader" />
     </WidlGenerateHeaders>
+
+    <WidlGenerateRpcClientStub Condition="'%(Midl.RpcClientStubFilePath)' != ''"
+        LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
+        IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
+        OutputFilePath="%(Midl.RpcClientStubFilePath)">
+      <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+      <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
+    </WidlGenerateRpcClientStub>
   </Target>
 
   <Target Name="PrepareMidl">
@@ -25,6 +34,10 @@
       <Midl>
         <TypeLibraryFilePath Condition="'%(Midl.TypeLibraryFilePath)' == '' and '%(Midl.GenerateTypeLibrary)' == 'true'">$(IntermediateOutputDirectory)Generated Files\%(Filename).tlb</TypeLibraryFilePath>
       </Midl>
+
+      <Midl>
+        <TypeLibraryFilePath Condition="'%(Midl.RpcClientStubFilePath)' == '' and '%(Midl.GenerateRpcClientStub)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).client.c</TypeLibraryFilePath>
+      </Midl>
     </ItemGroup>
 
     <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
@@ -36,9 +49,13 @@
       <Midl>
         <OutputFiles Condition="'%(Midl.TypeLibraryFilePath)' != ''">%(Midl.TypeLibraryFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
+
+      <Midl>
+        <OutputFiles Condition="'%(Midl.RpcClientStubFilePath)' != ''">%(Midl.RpcClientStubFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
     </ItemGroup>
 
     <!-- Third, create directories that don't already exist. -->
-    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath)" />
+    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath);%(Midl.RpcClientStubFilePath)" />
   </Target>
 </Project>
