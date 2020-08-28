@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0;net462</TargetFrameworks>
     <TargetName>Sunburst.LlvmMingw.BuildTasks</TargetName>
+    <AssemblyTitle>LLVM-MinGW SDK Build Tasks</AssemblyTitle>
     <EnableDefaultNoneItems>False</EnableDefaultNoneItems>
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
