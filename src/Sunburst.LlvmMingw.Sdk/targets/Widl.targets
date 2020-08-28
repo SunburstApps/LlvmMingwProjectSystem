@@ -3,7 +3,7 @@
   <Target Name="AfterMidl" AfterTargets="Midl" />
 
   <Target Name="Midl" DependsOnTargets="PrepareMidl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)">
-    <WidlGenerateHeaders
+    <WidlGenerateHeaders Condition="'%(Midl.HeaderFilePath)' != ''"
         LlvmMingwRoot="$(LlvmMingwRoot)" TargetArchitecture="$(Architecture)"
         SourceFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
         PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)">
