@@ -8,6 +8,9 @@
       <IncludeDirectories>$(DefaultMidlIncludeDirectories)</IncludeDirectories>
       <PreprocessorDefinitions>$(DefaultMidlPreprocesorDefinitions)</PreprocessorDefinitions>
       <AutoCompileGeneratedSourceFiles>True</AutoCompileGeneratedSourceFiles>
+      <GenerateHeader>False</GenerateHeader>
+      <GenerateTypeLibrary>False</GenerateTypeLibrary>
+      <GenerateRpcClientStub>False</GenerateRpcClientStub>
     </Midl>
   </ItemDefinitionGroup>
 
