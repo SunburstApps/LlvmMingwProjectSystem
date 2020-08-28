@@ -32,6 +32,7 @@ jobs:
 
             - name: Upload NuGet package
               uses: actions/upload-artifact@v2
+              if: ${{ github.action_name == 'pull_request' }}
               with:
                   name: NuGet package
                   path: bin/Packages/*.nupkg
