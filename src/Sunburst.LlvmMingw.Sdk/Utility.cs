@@ -5,6 +5,19 @@ namespace Sunburst.LlvmMingw.Sdk
 {
     internal static class Utility
     {
+        internal static bool IsValidTargetArchitecture(string arch)
+        {
+            return arch switch
+            {
+                "Win32" => true,
+                "x86" => true,
+                "x64" => true,
+                "ARM" => true,
+                "ARM64" => true,
+                _ => false
+            };
+        }
+
         internal static string ExpandToolName(string arch, string toolName, bool uwp = false)
         {
             StringBuilder builder = new StringBuilder();

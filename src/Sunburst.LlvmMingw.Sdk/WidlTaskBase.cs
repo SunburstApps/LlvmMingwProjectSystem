@@ -23,6 +23,19 @@ namespace Sunburst.LlvmMingw.Sdk
         public string[] PreprocessorDefinitions { get; set; }
         public bool EnableWarnings { get; set; }
 
+        protected override bool ValidateParameters()
+        {
+            if (!base.ValidateParameters()) return false;
+
+            if (!Utility.IsValidTargetArchitecture(TargetArchitecture))
+            {
+                Log.LogError("Invalid TargetArchitecture value '{0}'", TargetArchitecture);
+                return false;
+            }
+
+            return true;
+        }
+
         protected sealed override string GenerateCommandLineCommands()
         {
             CommandLineBuilder builder = new CommandLineBuilder();
