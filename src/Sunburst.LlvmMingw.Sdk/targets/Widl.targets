@@ -4,9 +4,10 @@
 
   <Target Name="Midl" DependsOnTargets="PrepareMidl" Inputs="@(Midl)" Outputs="%(Midl.OutputFiles)">
     <WidlGenerateHeaders Condition="'%(Midl.HeaderFilePath)' != ''"
-        LlvmMingwRoot="$(LlvmMingwRoot)" TargetArchitecture="$(Architecture)"
-        SourceFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
-        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)">
+        LlvmMingwInstallRoot="$(LlvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
+        IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
+        OutputHeaderFilePath="%(Midl.HeaderFilePath)">
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="Header" ItemName="ClangHeader" />
     </WidlGenerateHeaders>

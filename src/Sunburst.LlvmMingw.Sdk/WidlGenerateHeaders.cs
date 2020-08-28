@@ -11,14 +11,11 @@ namespace Sunburst.LlvmMingw.Sdk
         public ITaskItem[] Headers { get; set; }
 
         [Required]
-        public string OutputDirectory { get; set; }
-
-        [Required]
-        public string OutputHeaderFileName { get; set; }
+        public string OutputHeaderFilePath { get; set; }
 
         protected override void OnExecuteSuccess()
         {
-            var generatedHeader = new TaskItem(Path.Combine(OutputDirectory, OutputHeaderFileName));
+            var generatedHeader = new TaskItem(OutputHeaderFilePath);
             generatedHeader.SetMetadata("UsesPCH", "False");
 
             Headers = new[] { generatedHeader };
@@ -28,7 +25,7 @@ namespace Sunburst.LlvmMingw.Sdk
         protected override void GenerateCommandLineCommandsCore(CommandLineBuilder builder)
         {
             builder.AppendSwitch("-h");
-            builder.AppendSwitchIfNotNull("-o ", Path.Combine(OutputDirectory, OutputHeaderFileName));
+            builder.AppendSwitchIfNotNull("-o ", OutputHeaderFilePath);
 
             if (TargetArchitecture == "Win32" || TargetArchitecture == "x86" || TargetArchitecture == "ARM")
             {
@@ -40,6 +37,6 @@ namespace Sunburst.LlvmMingw.Sdk
             }
         }
 
-        protected override string GetWorkingDirectory() => OutputDirectory;
+        protected override string GetWorkingDirectory() => Path.GetDirectoryName(OutputHeaderFilePath);
     }
 }
