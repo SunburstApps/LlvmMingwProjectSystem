@@ -1,8 +1,7 @@
 {
     "version": "0.1-dev",
     "publicReleaseRefSpec": [
-        "^refs/heads/master$",
-        "^refs/heads/develop",
+        "^refs/heads/v\\d+(?:\\.\\d+){1,2}-[a-zA-Z0-9.-]+$",
         "^refs/tags/v\\d+(?:\\.\\d+){1,2}(?:-[a-zA-Z0-9.-]+)$"
     ]
 }
