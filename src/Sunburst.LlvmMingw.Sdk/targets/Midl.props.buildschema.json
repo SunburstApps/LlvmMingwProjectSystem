@@ -1,7 +1,7 @@
 ﻿{
     "items": {
         "Midl": {
-            "description": "List of IDL files to preprocess using an IDL compiler",
+            "description": "List of IDL files to process using an IDL compiler",
             "type": "file-list",
             "metadata": {
                 "IncludeDirectories": {
