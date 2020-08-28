@@ -1,0 +1,45 @@
+name: Continuous Delivery Release Build
+
+on:
+    push:
+        tags:
+            '*'
+
+jobs:
+    build:
+        steps:
+            - name: Clone
+              uses: actions/checkout@v2
+
+            - name: Install .NET Core
+              uses: actions/setup-dotnet@v1
+              with:
+                  dotnet-version: '5.0.100-preview.8.20417.9'
+
+            - name: Restore
+              run: dotnet restore Sunburst.LlvmMingwProjectSystem.sln
+              working-directory: src
+
+            - name: Build
+              run: dotnet pack /p:Configuration=Release
+              working-directory: src/Sunburst.LlvmMingw.Sdk
+
+            - name: Create Release
+              id: create-release
+              uses: actions/create-release@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  tag_name: ${{ github.ref }}
+                  release_name: ${{ github.ref }}
+                  draft: true
+                  prerelease: false
+
+            - name: Upload Release Assets
+              uses: actions/upload-release-asset@v1
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  upload_url: ${{ steps.create-release.upload_url }}
+                  asset_path: bin/Packages/*.nupkg
+                  asset_name: NuGet package
