@@ -54,7 +54,8 @@
         LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
         IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
         PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
-        OutputFilePath="%(Midl.TypeLibraryFilePath)" ResourceId="%(Midl.TypeLibraryResourceId)">
+        OutputFilePath="%(Midl.TypeLibraryFilePath)"
+        ResourceId="%(Midl.TypeLibraryResourceId)" OutputResourceFilePath="%(Midl.TypeLibraryResourceFilePath)">
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="GeneratedResources" ItemName="Resource" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
     </WidlGenerateTypeLibrary>
@@ -92,6 +93,10 @@
       <Midl>
         <TypeLibraryFilePath Condition="'%(Midl.TypeLibraryFilePath)' == '' and '%(Midl.GenerateTypeLibrary)' == 'true'">$(IntermediateOutputDirectory)%(Filename).tlb</TypeLibraryFilePath>
       </Midl>
+
+      <Midl>
+        <TypeLibraryResourceFilePath Condition="'%(Midl.TypeLibraryResourceFilePath)' == '' and '%(Midl.TypeLibraryResourceId)' != ''">$(IntermediateOutputDirectory)%(Filename).tlb.rc</TypeLibraryResourceFilePath>
+      </Midl>
     </ItemGroup>
 
     <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
@@ -122,6 +127,10 @@
 
       <Midl>
         <OutputFiles Condition="'%(Midl.TypeLibraryFilePath)' != ''">%(Midl.TypeLibraryFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
+
+      <Midl>
+        <OutputFiles Condition="'%(Midl.TypeLibraryResourceFilePath)' != ''">%(Midl.TypeLibraryResourceFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
     </ItemGroup>
 
