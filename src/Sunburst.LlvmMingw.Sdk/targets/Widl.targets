@@ -32,6 +32,15 @@
       <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
     </WidlGenerateRpcServerStub>
 
+    <WidlGenerateRpcProxySource Condition="'%(Midl.RpcProxySourceFilePath)' != ''"
+        LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
+        IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
+        OutputFilePath="%(Midl.RpcProxySourceFilePath)" StubType="%(Midl.RpcStubType)">
+      <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+      <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
+    </WidlGenerateRpcProxySource>
+
     <WidlGenerateIidFile Condition="'%(Midl.IidFilePath)' != ''"
         LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
         IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
@@ -66,6 +75,10 @@
       <Midl>
         <TypeLibraryFilePath Condition="'%(Midl.IidFilePath)' == '' and '%(Midl.GenerateIidFile)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).iid.c</TypeLibraryFilePath>
       </Midl>
+
+      <Midl>
+        <ProxyCodeFilePath Condition="'%(Midl.ProxyCodeFilePath)' == '' and '%(Midl.GenerateRpcProxyCode)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).proxy.c</TypeLibraryFilePath>
+      </Midl>
     </ItemGroup>
 
     <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
@@ -89,9 +102,13 @@
       <Midl>
         <OutputFiles Condition="'%(Midl.IidFilePath)' != ''">%(Midl.IidFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
+
+      <Midl>
+        <OutputFiles Condition="'%(Midl.ProxyCodeFilePath)' != ''">%(Midl.ProxyCodeFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
     </ItemGroup>
 
     <!-- Third, create directories that don't already exist. -->
-    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath);%(Midl.RpcClientStubFilePath);%(Midl.RpcServerStubFilePath)" />
+    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath);%(Midl.RpcClientStubFilePath);%(Midl.RpcServerStubFilePath);%(Midl.ProxyCodeFilePath)" />
   </Target>
 </Project>

@@ -48,6 +48,15 @@
                     "type": "file",
                     "description": "The full path to the RPC server stub source file output by the IDL compiler. Leave blank if undesired."
                 },
+                "GenerateRpcProxyCode": {
+                    "type": "bool",
+                    "default": "false",
+                    "description": "Whether or not to generate an RPC server stub source file"
+                },
+                "RpcProxyCodeFilePath": {
+                    "type": "file",
+                    "description": "The full path to the RPC proxy source file output by the IDL compiler. Leave blank if undesired."
+                },
                 "RpcSymbolPrefix": {
                     "type": "string",
                     "description": "Text to prefix the names of RPC client functions with"
