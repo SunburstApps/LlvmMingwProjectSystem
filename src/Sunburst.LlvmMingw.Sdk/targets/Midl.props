@@ -11,6 +11,7 @@
       <GenerateHeader>False</GenerateHeader>
       <GenerateTypeLibrary>False</GenerateTypeLibrary>
       <GenerateRpcClientStub>False</GenerateRpcClientStub>
+      <GenerateRpcServerStub>False</GenerateRpcServerStub>
     </Midl>
   </ItemDefinitionGroup>
 

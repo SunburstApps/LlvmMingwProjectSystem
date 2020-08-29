@@ -39,18 +39,22 @@
                     "type": "file",
                     "description": "The full path to the RPC client stub source file output by the IDL compiler. Leave blank if undesired."
                 },
-                "RpcClientSymbolPrefix": {
+                "GenerateRpcServerStub": {
+                    "type": "bool",
+                    "default": "false",
+                    "description": "Whether or not to generate an RPC server stub source file"
+                },
+                "RpcServerStubFilePath": {
+                    "type": "file",
+                    "description": "The full path to the RPC server stub source file output by the IDL compiler. Leave blank if undesired."
+                },
+                "RpcSymbolPrefix": {
                     "type": "string",
                     "description": "Text to prefix the names of RPC client functions with"
                 },
                 "RpcStubType": {
                     "description": "The type of RPC stubs to generate. See MSDN for details.",
-                    "type": {
-                        "": "Do not pass a stub type flag to the IDL compiler",
-                        "Os": "Pass \"-Os\" to the IDL compiler",
-                        "Oi": "Pass \"-Oi\" to the IDL compiler",
-                        "Oif": "Pass \"-Oif\" to the IDL compiler"
-                    }
+                    "type": "rpc-stub-type"
                 },
                 "OutputFiles": {
                     "type": "file-list",
@@ -80,6 +84,16 @@
         "DefaultMidlPreprocesorDefinitions": {
             "description": "Preprocessor macros to define when compiling any IDL file in this project",
             "type": "file-list"
+        }
+    },
+
+    "customTypes": {
+        "rpc-stub-type": {
+            "$name": "RpcStubType",
+            "$description": "Stub generation flags to pass to the IDL compiler. See MSDN for more information",
+            "Os": "Pass \"-Os\" to the IDL compiler",
+            "Oi": "Pass \"-Oi\" to the IDL compiler",
+            "Oif": "Pass \"-Oif\" to the IDL compiler"
         }
     }
 }
