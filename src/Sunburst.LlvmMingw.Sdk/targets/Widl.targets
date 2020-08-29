@@ -21,6 +21,16 @@
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
     </WidlGenerateRpcClientStub>
+
+    <WidlGenerateRpcServerStub Condition="'%(Midl.RpcServerStubFilePath)' != ''"
+        LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
+        IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
+        OutputFilePath="%(Midl.RpcServerStubFilePath)"
+        SymbolPrefix="%(Midl.RpcServerSymbolPrefix)" StubType="%(Midl.RpcStubType)">
+      <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+      <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
+    </WidlGenerateRpcServerStub>
   </Target>
 
   <Target Name="PrepareMidl">
@@ -39,6 +49,10 @@
       <Midl>
         <TypeLibraryFilePath Condition="'%(Midl.RpcClientStubFilePath)' == '' and '%(Midl.GenerateRpcClientStub)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).client.c</TypeLibraryFilePath>
       </Midl>
+
+      <Midl>
+        <TypeLibraryFilePath Condition="'%(Midl.RpcServerStubFilePath)' == '' and '%(Midl.GenerateRpcServerStub)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).server.c</TypeLibraryFilePath>
+      </Midl>
     </ItemGroup>
 
     <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
@@ -54,9 +68,13 @@
       <Midl>
         <OutputFiles Condition="'%(Midl.RpcClientStubFilePath)' != ''">%(Midl.RpcClientStubFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
+
+      <Midl>
+        <OutputFiles Condition="'%(Midl.RpcServerStubFilePath)' != ''">%(Midl.RpcServerStubFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
     </ItemGroup>
 
     <!-- Third, create directories that don't already exist. -->
-    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath);%(Midl.RpcClientStubFilePath)" />
+    <MakeParentDir Files="%(Midl.HeaderFilePath);%(Midl.TypeLibraryFilePath);%(Midl.RpcClientStubFilePath);%(Midl.RpcServerStubFilePath)" />
   </Target>
 </Project>
