@@ -16,14 +16,26 @@ namespace Sunburst.LlvmMingw.Sdk
         [Required]
         public ITaskItem OutputTlbFilePath { get; set; }
 
-        public int ResourceId { get; set; } = 0;
+        public string ResourceId { get; set; }
         public ITaskItem OutputResourceFilePath { get; set; }
+        private int? realResourceId;
 
         protected override bool ValidateParameters()
         {
-            if (ResourceId != 0 && OutputResourceFilePath == null)
+            if (!string.IsNullOrEmpty(ResourceId))
             {
-                Log.LogError("OututResourceFilePath must be specified if ResourceId is nonzero");
+                bool parsed = int.TryParse(ResourceId, out var id);
+                if (parsed) realResourceId = id;
+                else
+                {
+                    Log.LogError("TypeLibraryResourceId metadata must be a base-10 integer");
+                    return false;
+                }
+            }
+
+            if (realResourceId.HasValue && OutputResourceFilePath == null)
+            {
+                Log.LogError("OututResourceFilePath must be specified if TypeLibraryResourceId is nonzero");
                 return false;
             }
 
@@ -34,9 +46,9 @@ namespace Sunburst.LlvmMingw.Sdk
         {
             TypeLibrary = new TaskItem(TypeLibrary);
 
-            if (ResourceId != 0)
+            if (realResourceId.HasValue)
             {
-                string rcLine = $"{ResourceId} TYPELIB \"{OutputTlbFilePath.GetMetadata("FileName")}" +
+                string rcLine = $"{realResourceId.Value:D} TYPELIB \"{OutputTlbFilePath.GetMetadata("FileName")}" +
                     $"{OutputTlbFilePath.GetMetadata("Extension")}\"\r\n";
                 File.WriteAllText(OutputResourceFilePath.ItemSpec, rcLine);
 
