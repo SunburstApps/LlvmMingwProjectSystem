@@ -6,5 +6,10 @@
 
   <UsingTask TaskName="WidlGenerateHeaders" AssemblyFile="$(LlvmMingwTasksPath)" />
   <UsingTask TaskName="WidlGenerateRpcClientStub" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateRpcServerStub" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateRpcProxyCode" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateIidFile" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateIidFile" AssemblyFile="$(LlvmMingwTasksPath)" />
+  <UsingTask TaskName="WidlGenerateTypeLibrary" AssemblyFile="$(LlvmMingwTasksPath)" />
   <UsingTask TaskName="MakeParentDir" AssemblyFile="$(LlvmMingwTasksPath)" />
 </Project>
