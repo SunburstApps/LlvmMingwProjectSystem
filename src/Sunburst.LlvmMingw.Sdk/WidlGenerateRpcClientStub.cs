@@ -12,10 +12,13 @@ namespace Sunburst.LlvmMingw.Sdk
         [Output]
         public ITaskItem[] GeneratedSources { get; set; }
 
+        public string SymbolPrefix { get; set; }
+
         protected override void GenerateCommandLineCommandsCore(CommandLineBuilder builder)
         {
             builder.AppendSwitch("-c");
             builder.AppendSwitchIfNotNull("-o ", OutputFilePath);
+            builder.AppendSwitchIfNotNull("--prefix-client=", SymbolPrefix);
         }
 
         protected override void OnExecuteSuccess()

@@ -39,6 +39,10 @@
                     "type": "file",
                     "description": "The full path to the RPC client stub source file output by the IDL compiler. Leave blank if undesired."
                 },
+                "RpcClientSymbolPrefix": {
+                    "type": "string",
+                    "description": "Text to prefix the names of RPC client functions with"
+                },
                 "OutputFiles": {
                     "type": "file-list",
                     "description": "Files that are output by compilation of this IDL file. Used for incremental builds."

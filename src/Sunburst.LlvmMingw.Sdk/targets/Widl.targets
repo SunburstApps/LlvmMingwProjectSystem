@@ -16,7 +16,8 @@
         LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
         IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
         PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
-        OutputFilePath="%(Midl.RpcClientStubFilePath)">
+        OutputFilePath="%(Midl.RpcClientStubFilePath)"
+        SymbolPrefix="%(Midl.RpcClientSymbolPrefix)">
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
     </WidlGenerateRpcClientStub>
