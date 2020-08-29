@@ -31,6 +31,15 @@
       <Output TaskParameter="FileWrites" ItemName="FileWrites" />
       <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
     </WidlGenerateRpcServerStub>
+
+    <WidlGenerateIidFile Condition="'%(Midl.IidFilePath)' != ''"
+        LlvmMingwInstallRoot="$(LLvmMingwInstallRoot)" TargetArchitecture="$(Architecture)"
+        IdlFile="%(Midl.Identity)" IncludeDirectories="%(Midl.IncludeDirectories)"
+        PreprocessorDefinitions="%(Midl.PreprocessorDefinitions)"
+        OutputFilePath="%(Midl.IidFilePath)">
+      <Output TaskParameter="FileWrites" ItemName="FileWrites" />
+      <Output TaskParameter="GeneratedSources" ItemName="ClangCompile" Condition="'%(Midl.AutoCompileGeneratedSourceFiles) == 'true'" />
+    </WidlGenerateIidFile>
   </Target>
 
   <Target Name="PrepareMidl">
@@ -53,6 +62,10 @@
       <Midl>
         <TypeLibraryFilePath Condition="'%(Midl.RpcServerStubFilePath)' == '' and '%(Midl.GenerateRpcServerStub)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).server.c</TypeLibraryFilePath>
       </Midl>
+
+      <Midl>
+        <TypeLibraryFilePath Condition="'%(Midl.IidFilePath)' == '' and '%(Midl.GenerateIidFile)' == 'true'">$(IntermediateOutputDirectory)Generated Sources\%(Filename).iid.c</TypeLibraryFilePath>
+      </Midl>
     </ItemGroup>
 
     <!-- Second, add to %(Midl.OutputFiles) for dependency tracking -->
@@ -71,6 +84,10 @@
 
       <Midl>
         <OutputFiles Condition="'%(Midl.RpcServerStubFilePath)' != ''">%(Midl.RpcServerStubFilePath);%(Midl.OutputFiles)</OutputFiles>
+      </Midl>
+
+      <Midl>
+        <OutputFiles Condition="'%(Midl.IidFilePath)' != ''">%(Midl.IidFilePath);%(Midl.OutputFiles)</OutputFiles>
       </Midl>
     </ItemGroup>
 
