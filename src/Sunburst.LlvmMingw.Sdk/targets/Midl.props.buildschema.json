@@ -26,6 +26,10 @@
                     "default": "false",
                     "description": "Whether or not to generate a TLB file"
                 },
+                "TypeLibraryResourceId": {
+                    "type": "string",
+                    "description": "The resource ID of the generated TLB file as included in an RC file under the TYPELIB resource name"
+                },
                 "TypeLibraryFilePath": {
                     "type": "file",
                     "description": "The full path to the TLB output by the IDL compiler. Leave blank if undesired."

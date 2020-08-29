@@ -13,6 +13,7 @@
       <GenerateRpcClientStub>False</GenerateRpcClientStub>
       <GenerateRpcServerStub>False</GenerateRpcServerStub>
       <GenerateRpcProxyCode>False</GenerateRpcProxyCode>
+      <GenerateTypeLibrary>False</GenerateTypeLibrary>
     </Midl>
   </ItemDefinitionGroup>
 
